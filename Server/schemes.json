@@ -1,0 +1,222 @@
+[
+  {
+    "id": 1,
+    "title": "PM KISAN Samman Nidhi",
+    "ministry": "Ministry of Agriculture",
+    "description": "Financial benefit of ₹6000 per year to small and marginal farmer families",
+    "benefits": "₹6000 per year in three installments",
+    "category": "Farmers",
+    "occupations": ["farmer"],
+    "applyLink": "https://pmkisan.gov.in",
+    "eligibility": "Small and marginal farmer families"
+  },
+  {
+    "id": 2,
+    "title": "National Scholarship Portal",
+    "ministry": "Ministry of Education",
+    "description": "Central Sector Scholarship for meritorious students",
+    "benefits": "Up to ₹20,000 per year",
+    "category": "Students",
+    "occupations": ["student"],
+    "applyLink": "https://scholarships.gov.in",
+    "eligibility": "Meritorious students with family income less than ₹6 lakh"
+  },
+  {
+    "id": 3,
+    "title": "Ayushman Bharat Scheme",
+    "ministry": "Ministry of Health",
+    "description": "Health insurance coverage of ₹5 lakh per family per year",
+    "benefits": "₹5 lakh health coverage",
+    "category": "Health",
+    "occupations": ["healthcare", "farmer", "women", "senior"],
+    "applyLink": "https://pmjay.gov.in",
+    "eligibility": "Economically vulnerable families"
+  },
+  {
+    "id": 4,
+    "title": "PMEGP (Prime Minister's Employment Generation Programme)",
+    "ministry": "Ministry of MSME",
+    "description": "Financial assistance for starting new enterprises",
+    "benefits": "Subsidy up to 35% for general category",
+    "category": "Business",
+    "occupations": ["entrepreneur"],
+    "applyLink": "https://kviconline.gov.in",
+    "eligibility": "18+ years, 8th pass for projects above ₹10 lakh"
+  },
+  {
+    "id": 5,
+    "title": "Sukanya Samriddhi Yojana",
+    "ministry": "Ministry of Finance",
+    "description": "Savings scheme for girl child education and marriage",
+    "benefits": "7.6% interest rate, tax benefits",
+    "category": "Women",
+    "occupations": ["women"],
+    "applyLink": "https://www.indiapost.gov.in",
+    "eligibility": "Parents/guardians of girl child below 10 years"
+  },
+  {
+    "id": 6,
+    "title": "Pradhan Mantri Awas Yojana (PMAY)",
+    "ministry": "Ministry of Housing",
+    "description": "Housing for All by 2024",
+    "benefits": "Interest subsidy up to ₹2.67 lakh",
+    "category": "Housing",
+    "occupations": ["housing", "farmer", "women", "senior"],
+    "applyLink": "https://pmaymis.gov.in",
+    "eligibility": "EWS/LIG families without pucca house"
+  },
+  {
+    "id": 7,
+    "title": "PM Surya Ghar Muft Bijli Yojana",
+    "ministry": "Ministry of Power",
+    "description": "Free electricity through solar rooftop installations",
+    "benefits": "Subsidy up to ₹78,000 for solar panels",
+    "category": "Solar Energy",
+    "occupations": ["solar", "farmer", "entrepreneur"],
+    "applyLink": "https://pmsuryaghar.gov.in",
+    "eligibility": "Indian homeowners with suitable roof"
+  },
+  {
+    "id": 8,
+    "title": "National Pension Scheme for Traders/Self-Employed",
+    "ministry": "Ministry of Labour",
+    "description": "Pension scheme for small shopkeepers and self-employed",
+    "benefits": "₹3000 monthly pension after 60 years",
+    "category": "Senior Citizens",
+    "occupations": ["senior", "entrepreneur"],
+    "applyLink": "https://npscra.nsdl.co.in",
+    "eligibility": "Age 18-40 years, annual turnover < ₹1.5 crore"
+  },
+  {
+    "id": 9,
+    "title": "Khelo India Scheme",
+    "ministry": "Ministry of Sports",
+    "description": "Promote sports and identify young talent",
+    "benefits": "Financial support up to ₹5 lakh per athlete",
+    "category": "Sports",
+    "occupations": ["sports", "student"],
+    "applyLink": "https://kheloindia.gov.in",
+    "eligibility": "Indian citizens aged 12-21 years"
+  },
+  {
+    "id": 10,
+    "title": "Stand Up India Scheme",
+    "ministry": "Ministry of Finance",
+    "description": "Loans to SC/ST and women entrepreneurs",
+    "benefits": "Bank loans between ₹10 lakh to ₹1 crore",
+    "category": "Business",
+    "occupations": ["women", "scst", "entrepreneur"],
+    "applyLink": "https://standupmitra.in",
+    "eligibility": "SC/ST or women entrepreneurs above 18 years"
+  },
+  {
+    "id": 11,
+    "title": "Pradhan Mantri Matru Vandana Yojana",
+    "ministry": "Ministry of Women and Child Development",
+    "description": "Maternity benefit for pregnant women",
+    "benefits": "₹5000 cash incentive",
+    "category": "Women",
+    "occupations": ["women"],
+    "applyLink": "https://wcd.nic.in",
+    "eligibility": "Pregnant and lactating mothers"
+  },
+  {
+    "id": 12,
+    "title": "National Health Mission",
+    "ministry": "Ministry of Health",
+    "description": "Comprehensive healthcare services for rural and urban areas",
+    "benefits": "Access to quality healthcare",
+    "category": "Health",
+    "occupations": ["healthcare", "women", "senior", "student"],
+    "applyLink": "https://nhm.gov.in",
+    "eligibility": "All Indian citizens"
+  },
+  {
+    "id": 13,
+    "title": "Rooftop Solar Programme Phase II",
+    "ministry": "Ministry of New and Renewable Energy",
+    "description": "Financial assistance for rooftop solar installations",
+    "benefits": "40% subsidy for systems up to 3kW",
+    "category": "Solar Energy",
+    "occupations": ["solar", "entrepreneur", "housing"],
+    "applyLink": "https://mnre.gov.in",
+    "eligibility": "Residential households"
+  },
+  {
+    "id": 14,
+    "title": "KUSUM Scheme (Solar Pumps for Farmers)",
+    "ministry": "Ministry of New and Renewable Energy",
+    "description": "Solar water pumps for farmers",
+    "benefits": "60% subsidy on solar pumps",
+    "category": "Solar Energy",
+    "occupations": ["solar", "farmer"],
+    "applyLink": "https://mnre.gov.in/kusum",
+    "eligibility": "Farmers with land ownership"
+  },
+  {
+    "id": 15,
+    "title": "PM Jan Arogya Yojana (PMJAY)",
+    "ministry": "Ministry of Health",
+    "description": "Secondary and tertiary healthcare coverage",
+    "benefits": "₹5 lakh per family per year for hospitalization",
+    "category": "Health",
+    "occupations": ["healthcare", "women", "senior", "farmer"],
+    "applyLink": "https://pmjay.gov.in",
+    "eligibility": "Poor and vulnerable families"
+  },
+  {
+    "id": 16,
+    "title": "Mission Indradhanush",
+    "ministry": "Ministry of Health",
+    "description": "Universal immunization program for children and pregnant women",
+    "benefits": "Free vaccination against 12 diseases",
+    "category": "Health",
+    "occupations": ["healthcare", "women", "student"],
+    "applyLink": "https://nhm.gov.in",
+    "eligibility": "Children under 2 years and pregnant women"
+  },
+  {
+    "id": 17,
+    "title": "Pradhan Mantri Bhartiya Janaushadhi Pariyojana",
+    "ministry": "Ministry of Health",
+    "description": "Affordable generic medicines at special stores",
+    "benefits": "50-90% cheaper medicines",
+    "category": "Health",
+    "occupations": ["healthcare", "senior", "student", "women"],
+    "applyLink": "https://janaushadhi.gov.in",
+    "eligibility": "All Indian citizens"
+  },
+  {
+    "id": 18,
+    "title": "Target Olympic Podium Scheme (TOPS)",
+    "ministry": "Ministry of Sports",
+    "description": "Special support to Olympic medal hopefuls",
+    "benefits": "Financial assistance up to ₹50 lakh per athlete",
+    "category": "Sports",
+    "occupations": ["sports", "student"],
+    "applyLink": "https://yas.nic.in",
+    "eligibility": "Athletes with potential to win Olympic medals"
+  },
+  {
+    "id": 19,
+    "title": "National Sports Development Fund",
+    "ministry": "Ministry of Sports",
+    "description": "Financial support for sports infrastructure and training",
+    "benefits": "Funding for equipment, coaching, and facilities",
+    "category": "Sports",
+    "occupations": ["sports", "student"],
+    "applyLink": "https://yas.nic.in",
+    "eligibility": "Registered sports associations and athletes"
+  },
+  {
+    "id": 20,
+    "title": "Fit India Movement",
+    "ministry": "Ministry of Sports",
+    "description": "Promoting fitness and healthy lifestyle",
+    "benefits": "Grants for fitness infrastructure",
+    "category": "Sports",
+    "occupations": ["sports", "student", "senior"],
+    "applyLink": "https://fitindia.gov.in",
+    "eligibility": "Schools, colleges, and communities"
+  }
+]
