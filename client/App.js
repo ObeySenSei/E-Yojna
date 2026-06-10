@@ -31,6 +31,7 @@ function AppContent() {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [occupations, setOccupations] = useState([]);
   const [backendStatus, setBackendStatus] = useState('checking');
+  const [offlineMessageVisible, setOfflineMessageVisible] = useState(true);
 
   useEffect(() => {
     loadFavorites();
@@ -43,6 +44,14 @@ function AppContent() {
       filterSchemes();
     }
   }, [schemes, selectedOccupation, showAll, searchQuery, selectedCategory]);
+
+  // Auto-hide offline message after 5 seconds
+  useEffect(() => {
+    if (backendStatus === 'offline') {
+      const timer = setTimeout(() => setOfflineMessageVisible(false), 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [backendStatus]);
 
   const loadFavorites = async () => {
     try {
@@ -76,34 +85,68 @@ function AppContent() {
 
   const loadOccupations = async () => {
     try {
+      console.log('🔥 loadOccupations started');
       const occ = await fetchOccupationsFromBackend();
-      if (occ && occ.length > 0) {
+      console.log('🔥 occupations response:', occ);
+      if (occ && Array.isArray(occ) && occ.length > 0) {
         setOccupations(occ);
         console.log('✅ Loaded occupations:', occ.length);
+      } else {
+        console.log('⚠️ No occupations from backend, using defaults');
+        // Fallback occupations
+        setOccupations([
+          { id: 'farmer', name: 'Farmer', icon: '👨‍🌾' },
+          { id: 'student', name: 'Student', icon: '📚' },
+          { id: 'women', name: 'Women', icon: '👩' },
+          { id: 'senior', name: 'Senior Citizen', icon: '🧓' },
+          { id: 'entrepreneur', name: 'Entrepreneur', icon: '💼' },
+        ]);
       }
     } catch (error) {
-      console.error('Failed to load occupations:', error);
+      console.error('❌ Failed to load occupations:', error);
+      // Set fallback occupations on error
+      setOccupations([
+        { id: 'farmer', name: 'Farmer', icon: '👨‍🌾' },
+        { id: 'student', name: 'Student', icon: '📚' },
+        { id: 'women', name: 'Women', icon: '👩' },
+        { id: 'senior', name: 'Senior Citizen', icon: '🧓' },
+        { id: 'entrepreneur', name: 'Entrepreneur', icon: '💼' },
+      ]);
     }
   };
 
   const loadSchemes = async () => {
     setLoading(true);
+    setBackendStatus('checking');
+    
     try {
+      console.log('🔥 loadSchemes started');
+      
+      // Try to fetch from backend with timeout
       const data = await fetchSchemesFromBackend();
-      if (data && data.length > 0) {
+      
+      console.log('🔥 backend response:', data);
+      
+      // Check if we got valid data
+      if (data && Array.isArray(data) && data.length > 0) {
         setSchemes(data);
         setBackendStatus('connected');
         console.log('✅ Connected to backend, loaded', data.length, 'schemes');
       } else {
+        // Fallback to mock data
+        console.log('⚠️ Backend returned no data, using mock data');
         setSchemes(MOCK_SCHEMES);
         setBackendStatus('offline');
+        setOfflineMessageVisible(true);
       }
     } catch (error) {
-      console.error('Error loading schemes:', error);
-      setSchemes(MOCK_SCHEMES);
+      console.error('❌ API Error:', error);
       setBackendStatus('offline');
+      setSchemes(MOCK_SCHEMES);
+      setOfflineMessageVisible(true);
     } finally {
       setLoading(false);
+      console.log('🔥 loadSchemes completed, loading:', false);
     }
   };
 
@@ -154,6 +197,9 @@ function AppContent() {
       <View style={styles.center}>
         <ActivityIndicator size="large" color="#FF9933" />
         <Text style={styles.loadingText}>Loading schemes...</Text>
+        {backendStatus === 'checking' && (
+          <Text style={styles.loadingSubtext}>Connecting to server...</Text>
+        )}
       </View>
     );
   }
@@ -162,9 +208,31 @@ function AppContent() {
     <SafeAreaView style={styles.container}>
       <Header />
       
+      {/* Connection Status Badges */}
       {backendStatus === 'connected' && (
         <View style={styles.connectionBadge}>
           <Text style={styles.connectionBadgeText}>🟢 Live Data</Text>
+        </View>
+      )}
+      
+      {/* Offline warning banner - auto hides after 5 seconds */}
+      {backendStatus === 'offline' && offlineMessageVisible && (
+        <View style={{ 
+          backgroundColor: '#FFEBEE', 
+          padding: 10, 
+          marginHorizontal: 16, 
+          marginTop: 8, 
+          borderRadius: 8,
+          flexDirection: 'row',
+          alignItems: 'center',
+          justifyContent: 'space-between'
+        }}>
+          <Text style={{ color: '#D32F2F', fontSize: 12, flex: 1 }}>
+            ⚠️ Using offline data. Check your internet connection.
+          </Text>
+          <TouchableOpacity onPress={() => setOfflineMessageVisible(false)}>
+            <Text style={{ color: '#D32F2F', fontSize: 16, fontWeight: 'bold', marginLeft: 8 }}>✕</Text>
+          </TouchableOpacity>
         </View>
       )}
       

@@ -1,0 +1,12 @@
+{
+  "expo": {
+    "extra": {
+      "eas": {
+        "projectId": "6e454da3-0808-415d-8c5e-4aac929ada87"
+      }
+    },
+    "android": {
+      "package": "com.debanga_hazarika.eyojna"
+    }
+  }
+}

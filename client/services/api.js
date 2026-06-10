@@ -2,8 +2,11 @@
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-// For web (localhost)
-const API_BASE_URL = 'http://localhost:5000/api';
+// For Render Production (LIVE)
+const API_BASE_URL = 'https://e-yojna-api.onrender.com/api';
+
+// For local development (uncomment when testing locally)
+// const API_BASE_URL = 'http://localhost:5000/api';
 
 const api = axios.create({
   baseURL: API_BASE_URL,
