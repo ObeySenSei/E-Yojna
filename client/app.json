@@ -5,20 +5,27 @@
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "userInterfaceStyle": "automatic",
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.eyojna.app"
+      "bundleIdentifier": "com.eyojna.app",
+      "userInterfaceStyle": "automatic"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.eyojna.app"
+      "package": "com.eyojna.app",
+      "userInterfaceStyle": "automatic",
+      "statusBar": {
+        "backgroundColor": "#121212",
+        "barStyle": "light-content",
+        "translucent": false
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"

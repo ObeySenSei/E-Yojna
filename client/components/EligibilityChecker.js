@@ -3,9 +3,17 @@ import {
   View, Text, TextInput, TouchableOpacity, ScrollView,
   Modal, Alert, FlatList
 } from 'react-native';
-import { styles as globalStyles } from '../styles/styles';
+import { useTheme } from '../context/ThemeContext';
+import { getThemeStyles } from '../styles/styles';
 
 export default function EligibilityChecker({ schemes, onViewScheme }) {
+  const { isDarkMode } = useTheme();
+  const globalStyles = getThemeStyles(isDarkMode);
+  
+  // Dynamic styles based on theme
+  const styles = getDynamicStyles(isDarkMode);
+  const pickerStyles = getPickerStyles(isDarkMode);
+  
   const [checkerModalVisible, setCheckerModalVisible] = useState(false);
   const [resultsModalVisible, setResultsModalVisible] = useState(false);
   const [eligibleSchemes, setEligibleSchemes] = useState([]);
@@ -174,8 +182,8 @@ export default function EligibilityChecker({ schemes, onViewScheme }) {
         visible={checkerModalVisible}
         onRequestClose={() => setCheckerModalVisible(false)}
       >
-        <ScrollView style={styles.checkerModal}>
-          <View style={styles.checkerModalHeader}>
+        <ScrollView style={[styles.checkerModal, { backgroundColor: isDarkMode ? '#121212' : '#F8F9FA' }]}>
+          <View style={[styles.checkerModalHeader, { backgroundColor: isDarkMode ? '#1E1E1E' : '#FF9933' }]}>
             <Text style={styles.checkerModalTitle}>🎯 Check Your Eligibility</Text>
             <TouchableOpacity onPress={() => setCheckerModalVisible(false)}>
               <Text style={styles.closeText}>✕</Text>
@@ -183,111 +191,152 @@ export default function EligibilityChecker({ schemes, onViewScheme }) {
           </View>
           
           <View style={styles.formContainer}>
-            <Text style={styles.label}>Age <Text style={styles.requiredStar}>*</Text></Text>
+            <Text style={[styles.label, { color: isDarkMode ? '#FFFFFF' : '#333' }]}>Age <Text style={styles.requiredStar}>*</Text></Text>
             <TextInput
-              style={styles.input}
+              style={[styles.input, { 
+                backgroundColor: isDarkMode ? '#1E1E1E' : '#FFF',
+                color: isDarkMode ? '#FFFFFF' : '#333',
+                borderColor: isDarkMode ? '#333' : '#E0E0E0'
+              }]}
               placeholder="Enter your age"
-              placeholderTextColor="#999"
+              placeholderTextColor={isDarkMode ? '#888' : '#999'}
               keyboardType="numeric"
               value={formData.age}
               onChangeText={(text) => setFormData({...formData, age: text})}
             />
             
-            <Text style={styles.label}>Occupation <Text style={styles.requiredStar}>*</Text></Text>
+            <Text style={[styles.label, { color: isDarkMode ? '#FFFFFF' : '#333' }]}>Occupation <Text style={styles.requiredStar}>*</Text></Text>
             <TouchableOpacity 
-              style={styles.selectInput}
+              style={[styles.selectInput, { 
+                backgroundColor: isDarkMode ? '#1E1E1E' : '#FFF',
+                borderColor: isDarkMode ? '#333' : '#E0E0E0'
+              }]}
               onPress={() => setShowOccupationPicker(true)}
             >
-              <Text style={formData.occupation ? styles.selectText : styles.placeholderText}>
+              <Text style={formData.occupation ? 
+                [styles.selectText, { color: isDarkMode ? '#FFFFFF' : '#333' }] : 
+                [styles.placeholderText, { color: isDarkMode ? '#888' : '#999' }]}>
                 {formData.occupation || "Select Occupation"}
               </Text>
-              <Text style={styles.dropdownIcon}>▼</Text>
+              <Text style={[styles.dropdownIcon, { color: isDarkMode ? '#888' : '#666' }]}>▼</Text>
             </TouchableOpacity>
             
-            <Text style={styles.label}>Gender <Text style={styles.requiredStar}>*</Text></Text>
+            <Text style={[styles.label, { color: isDarkMode ? '#FFFFFF' : '#333' }]}>Gender <Text style={styles.requiredStar}>*</Text></Text>
             <TouchableOpacity 
-              style={styles.selectInput}
+              style={[styles.selectInput, { 
+                backgroundColor: isDarkMode ? '#1E1E1E' : '#FFF',
+                borderColor: isDarkMode ? '#333' : '#E0E0E0'
+              }]}
               onPress={() => setShowGenderPicker(true)}
             >
-              <Text style={formData.gender ? styles.selectText : styles.placeholderText}>
+              <Text style={formData.gender ? 
+                [styles.selectText, { color: isDarkMode ? '#FFFFFF' : '#333' }] : 
+                [styles.placeholderText, { color: isDarkMode ? '#888' : '#999' }]}>
                 {formData.gender || "Select Gender"}
               </Text>
-              <Text style={styles.dropdownIcon}>▼</Text>
+              <Text style={[styles.dropdownIcon, { color: isDarkMode ? '#888' : '#666' }]}>▼</Text>
             </TouchableOpacity>
             
-            <Text style={styles.label}>Annual Income (₹)</Text>
+            <Text style={[styles.label, { color: isDarkMode ? '#FFFFFF' : '#333' }]}>Annual Income (₹)</Text>
             <TextInput
-              style={styles.input}
+              style={[styles.input, { 
+                backgroundColor: isDarkMode ? '#1E1E1E' : '#FFF',
+                color: isDarkMode ? '#FFFFFF' : '#333',
+                borderColor: isDarkMode ? '#333' : '#E0E0E0'
+              }]}
               placeholder="Enter your annual income (optional)"
-              placeholderTextColor="#999"
+              placeholderTextColor={isDarkMode ? '#888' : '#999'}
               keyboardType="numeric"
               value={formData.income}
               onChangeText={(text) => setFormData({...formData, income: text})}
             />
             
-            <Text style={styles.label}>Category <Text style={styles.requiredStar}>*</Text></Text>
+            <Text style={[styles.label, { color: isDarkMode ? '#FFFFFF' : '#333' }]}>Category <Text style={styles.requiredStar}>*</Text></Text>
             <TouchableOpacity 
-              style={styles.selectInput}
+              style={[styles.selectInput, { 
+                backgroundColor: isDarkMode ? '#1E1E1E' : '#FFF',
+                borderColor: isDarkMode ? '#333' : '#E0E0E0'
+              }]}
               onPress={() => setShowCategoryPicker(true)}
             >
-              <Text style={formData.category ? styles.selectText : styles.placeholderText}>
+              <Text style={formData.category ? 
+                [styles.selectText, { color: isDarkMode ? '#FFFFFF' : '#333' }] : 
+                [styles.placeholderText, { color: isDarkMode ? '#888' : '#999' }]}>
                 {formData.category || "Select Category"}
               </Text>
-              <Text style={styles.dropdownIcon}>▼</Text>
+              <Text style={[styles.dropdownIcon, { color: isDarkMode ? '#888' : '#666' }]}>▼</Text>
             </TouchableOpacity>
             
-            <Text style={styles.sectionTitle}>Additional Qualifications (if applicable)</Text>
+            <Text style={[styles.sectionTitle, { color: isDarkMode ? '#FF9933' : '#FF9933' }]}>Additional Qualifications (if applicable)</Text>
             
             <TouchableOpacity 
-              style={styles.checkbox}
+              style={[styles.checkbox, { 
+                backgroundColor: isDarkMode ? '#1E1E1E' : '#FFF',
+                borderColor: isDarkMode ? '#333' : '#E0E0E0'
+              }]}
               onPress={() => setFormData({...formData, hasGirlChild: !formData.hasGirlChild})}
             >
-              <Text style={styles.checkboxText}>
+              <Text style={[styles.checkboxText, { color: isDarkMode ? '#FFFFFF' : '#333' }]}>
                 {formData.hasGirlChild ? '✅' : '⬜'} Have a girl child below 10 years
               </Text>
             </TouchableOpacity>
             
             <TouchableOpacity 
-              style={styles.checkbox}
+              style={[styles.checkbox, { 
+                backgroundColor: isDarkMode ? '#1E1E1E' : '#FFF',
+                borderColor: isDarkMode ? '#333' : '#E0E0E0'
+              }]}
               onPress={() => setFormData({...formData, isHomeowner: !formData.isHomeowner})}
             >
-              <Text style={styles.checkboxText}>
+              <Text style={[styles.checkboxText, { color: isDarkMode ? '#FFFFFF' : '#333' }]}>
                 {formData.isHomeowner ? '✅' : '⬜'} Own a home with rooftop space
               </Text>
             </TouchableOpacity>
             
             <TouchableOpacity 
-              style={styles.checkbox}
+              style={[styles.checkbox, { 
+                backgroundColor: isDarkMode ? '#1E1E1E' : '#FFF',
+                borderColor: isDarkMode ? '#333' : '#E0E0E0'
+              }]}
               onPress={() => setFormData({...formData, isEntrepreneur: !formData.isEntrepreneur})}
             >
-              <Text style={styles.checkboxText}>
+              <Text style={[styles.checkboxText, { color: isDarkMode ? '#FFFFFF' : '#333' }]}>
                 {formData.isEntrepreneur ? '✅' : '⬜'} Running a business/startup
               </Text>
             </TouchableOpacity>
             
             <TouchableOpacity 
-              style={styles.checkbox}
+              style={[styles.checkbox, { 
+                backgroundColor: isDarkMode ? '#1E1E1E' : '#FFF',
+                borderColor: isDarkMode ? '#333' : '#E0E0E0'
+              }]}
               onPress={() => setFormData({...formData, isStudent: !formData.isStudent})}
             >
-              <Text style={styles.checkboxText}>
+              <Text style={[styles.checkboxText, { color: isDarkMode ? '#FFFFFF' : '#333' }]}>
                 {formData.isStudent ? '✅' : '⬜'} Currently a student
               </Text>
             </TouchableOpacity>
             
             <TouchableOpacity 
-              style={styles.checkbox}
+              style={[styles.checkbox, { 
+                backgroundColor: isDarkMode ? '#1E1E1E' : '#FFF',
+                borderColor: isDarkMode ? '#333' : '#E0E0E0'
+              }]}
               onPress={() => setFormData({...formData, hasSportsAchievement: !formData.hasSportsAchievement})}
             >
-              <Text style={styles.checkboxText}>
+              <Text style={[styles.checkboxText, { color: isDarkMode ? '#FFFFFF' : '#333' }]}>
                 {formData.hasSportsAchievement ? '✅' : '⬜'} Have sports achievements at state/national level
               </Text>
             </TouchableOpacity>
             
             <TouchableOpacity 
-              style={styles.checkbox}
+              style={[styles.checkbox, { 
+                backgroundColor: isDarkMode ? '#1E1E1E' : '#FFF',
+                borderColor: isDarkMode ? '#333' : '#E0E0E0'
+              }]}
               onPress={() => setFormData({...formData, bplCard: !formData.bplCard})}
             >
-              <Text style={styles.checkboxText}>
+              <Text style={[styles.checkboxText, { color: isDarkMode ? '#FFFFFF' : '#333' }]}>
                 {formData.bplCard ? '✅' : '⬜'} Hold a BPL/Ration card
               </Text>
             </TouchableOpacity>
@@ -307,13 +356,16 @@ export default function EligibilityChecker({ schemes, onViewScheme }) {
         onRequestClose={() => setResultsModalVisible(false)}
       >
         <View style={globalStyles.modalOverlay}>
-          <View style={[globalStyles.modalContent, { maxHeight: '90%' }]}>
+          <View style={[globalStyles.modalContent, { 
+            maxHeight: '90%',
+            backgroundColor: isDarkMode ? '#1E1E1E' : '#FFF'
+          }]}>
             <View style={globalStyles.modalHeader}>
-              <Text style={[globalStyles.modalTitle, { fontSize: 20 }]}>
+              <Text style={[globalStyles.modalTitle, { fontSize: 20, color: isDarkMode ? '#FFF' : '#333' }]}>
                 🎯 Eligible Schemes ({eligibleSchemes.length})
               </Text>
               <TouchableOpacity onPress={() => setResultsModalVisible(false)} style={globalStyles.closeBtn}>
-                <Text style={globalStyles.closeBtnText}>✕</Text>
+                <Text style={[globalStyles.closeBtnText, { color: isDarkMode ? '#FFF' : '#333' }]}>✕</Text>
               </TouchableOpacity>
             </View>
             
@@ -321,8 +373,8 @@ export default function EligibilityChecker({ schemes, onViewScheme }) {
               {eligibleSchemes.length === 0 ? (
                 <View style={globalStyles.noDataContainer}>
                   <Text style={globalStyles.noDataEmoji}>😔</Text>
-                  <Text style={globalStyles.noDataTitle}>No eligible schemes found</Text>
-                  <Text style={globalStyles.noDataText}>
+                  <Text style={[globalStyles.noDataTitle, { color: isDarkMode ? '#FFF' : '#333' }]}>No eligible schemes found</Text>
+                  <Text style={[globalStyles.noDataText, { color: isDarkMode ? '#AAA' : '#666' }]}>
                     Try adjusting your criteria or check back later for new schemes
                   </Text>
                 </View>
@@ -330,16 +382,19 @@ export default function EligibilityChecker({ schemes, onViewScheme }) {
                 eligibleSchemes.map(scheme => (
                   <TouchableOpacity
                     key={scheme.id}
-                    style={styles.eligibleCard}
+                    style={[styles.eligibleCard, {
+                      backgroundColor: isDarkMode ? '#2C2C2C' : '#FFF',
+                      borderColor: isDarkMode ? '#444' : '#E0E0E0'
+                    }]}
                     onPress={() => {
                       setResultsModalVisible(false);
                       onViewScheme(scheme);
                     }}
                   >
-                    <Text style={styles.eligibleTitle}>✓ {scheme.title}</Text>
-                    <Text style={styles.eligibleDesc}>{scheme.description}</Text>
-                    <Text style={styles.eligibleBenefits}>💰 {scheme.benefits}</Text>
-                    <Text style={styles.eligibleMinistry}>🏛️ {scheme.ministry}</Text>
+                    <Text style={[styles.eligibleTitle, { color: '#138808' }]}>✓ {scheme.title}</Text>
+                    <Text style={[styles.eligibleDesc, { color: isDarkMode ? '#CCC' : '#666' }]}>{scheme.description}</Text>
+                    <Text style={[styles.eligibleBenefits, { color: '#FF9933' }]}>💰 {scheme.benefits}</Text>
+                    <Text style={[styles.eligibleMinistry, { color: isDarkMode ? '#888' : '#999' }]}>🏛️ {scheme.ministry}</Text>
                   </TouchableOpacity>
                 ))
               )}
@@ -379,7 +434,8 @@ export default function EligibilityChecker({ schemes, onViewScheme }) {
   );
 }
 
-const styles = {
+// Dynamic styles based on theme
+const getDynamicStyles = (isDarkMode) => ({
   checkerButton: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -397,71 +453,64 @@ const styles = {
   checkerTitle: { fontSize: 18, fontWeight: 'bold', color: '#FFF' },
   checkerSubtitle: { fontSize: 12, color: '#FFF', opacity: 0.9, marginTop: 2 },
   checkerArrow: { fontSize: 24, color: '#FFF', marginLeft: 'auto' },
-  checkerModal: { flex: 1, backgroundColor: '#F8F9FA' },
+  checkerModal: { flex: 1 },
   checkerModalHeader: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     padding: 20,
-    backgroundColor: '#FF9933',
     borderBottomLeftRadius: 20,
     borderBottomRightRadius: 20
   },
   checkerModalTitle: { fontSize: 20, fontWeight: 'bold', color: '#FFF' },
   closeText: { fontSize: 24, color: '#FFF', fontWeight: 'bold' },
   formContainer: { padding: 20 },
-  label: { fontSize: 14, fontWeight: '600', color: '#333', marginTop: 12, marginBottom: 6 },
+  label: { fontSize: 14, fontWeight: '600', marginTop: 12, marginBottom: 6 },
   requiredStar: { color: '#FF0000', fontSize: 14 },
   input: {
-    backgroundColor: '#FFF',
     borderRadius: 12,
     padding: 12,
     fontSize: 16,
-    borderWidth: 1,
-    borderColor: '#E0E0E0'
+    borderWidth: 1
   },
   selectInput: {
-    backgroundColor: '#FFF',
     borderRadius: 12,
     padding: 12,
     fontSize: 16,
     borderWidth: 1,
-    borderColor: '#E0E0E0',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center'
   },
-  selectText: { fontSize: 16, color: '#333' },
-  placeholderText: { fontSize: 16, color: '#999' },
-  dropdownIcon: { fontSize: 12, color: '#666' },
-  sectionTitle: { fontSize: 16, fontWeight: 'bold', color: '#FF9933', marginTop: 20, marginBottom: 12 },
-  checkbox: { padding: 12, backgroundColor: '#FFF', borderRadius: 12, marginBottom: 8, borderWidth: 1, borderColor: '#E0E0E0' },
-  checkboxText: { fontSize: 14, color: '#333' },
+  selectText: { fontSize: 16 },
+  placeholderText: { fontSize: 16 },
+  dropdownIcon: { fontSize: 12 },
+  sectionTitle: { fontSize: 16, fontWeight: 'bold', marginTop: 20, marginBottom: 12 },
+  checkbox: { padding: 12, borderRadius: 12, marginBottom: 8, borderWidth: 1 },
+  checkboxText: { fontSize: 14 },
   submitButton: { backgroundColor: '#138808', padding: 16, borderRadius: 12, alignItems: 'center', marginTop: 20, marginBottom: 40 },
   submitButtonText: { color: '#FFF', fontSize: 18, fontWeight: 'bold' },
   eligibleCard: {
-    backgroundColor: '#FFF',
     borderRadius: 12,
     padding: 16,
     marginBottom: 12,
     borderWidth: 1,
-    borderColor: '#E0E0E0',
     elevation: 2
   },
-  eligibleTitle: { fontSize: 16, fontWeight: 'bold', color: '#138808', marginBottom: 8 },
-  eligibleDesc: { fontSize: 13, color: '#666', marginBottom: 8, lineHeight: 18 },
-  eligibleBenefits: { fontSize: 13, color: '#FF9933', fontWeight: '600', marginBottom: 8 },
-  eligibleMinistry: { fontSize: 11, color: '#999', marginTop: 4 }
-};
+  eligibleTitle: { fontSize: 16, fontWeight: 'bold', marginBottom: 8 },
+  eligibleDesc: { fontSize: 13, marginBottom: 8, lineHeight: 18 },
+  eligibleBenefits: { fontSize: 13, fontWeight: '600', marginBottom: 8 },
+  eligibleMinistry: { fontSize: 11, marginTop: 4 }
+});
 
-const pickerStyles = {
+const getPickerStyles = (isDarkMode) => ({
   modalOverlay: {
     flex: 1,
     backgroundColor: 'rgba(0,0,0,0.5)',
     justifyContent: 'flex-end'
   },
   pickerModal: {
-    backgroundColor: '#FFF',
+    backgroundColor: isDarkMode ? '#1E1E1E' : '#FFF',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     maxHeight: '80%'
@@ -472,7 +521,7 @@ const pickerStyles = {
     alignItems: 'center',
     padding: 20,
     borderBottomWidth: 1,
-    borderBottomColor: '#E0E0E0'
+    borderBottomColor: isDarkMode ? '#333' : '#E0E0E0'
   },
   pickerTitle: {
     fontSize: 18,
@@ -481,7 +530,7 @@ const pickerStyles = {
   },
   closeText: {
     fontSize: 24,
-    color: '#666'
+    color: isDarkMode ? '#FFF' : '#666'
   },
   pickerOption: {
     flexDirection: 'row',
@@ -489,14 +538,14 @@ const pickerStyles = {
     alignItems: 'center',
     padding: 16,
     borderBottomWidth: 1,
-    borderBottomColor: '#F0F0F0'
+    borderBottomColor: isDarkMode ? '#333' : '#F0F0F0'
   },
   pickerOptionActive: {
-    backgroundColor: '#FFF8F0'
+    backgroundColor: isDarkMode ? '#2C2C2C' : '#FFF8F0'
   },
   pickerOptionText: {
     fontSize: 16,
-    color: '#333'
+    color: isDarkMode ? '#FFF' : '#333'
   },
   pickerOptionTextActive: {
     color: '#FF9933',
@@ -506,4 +555,4 @@ const pickerStyles = {
     fontSize: 18,
     color: '#138808'
   }
-};
+});

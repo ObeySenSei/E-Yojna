@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, SafeAreaView, ScrollView, ActivityIndicator, TouchableOpacity, Linking, Alert } from 'react-native';
+import { View, Text, SafeAreaView, ScrollView, ActivityIndicator, TouchableOpacity, Linking, Alert, StatusBar } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { getThemeStyles } from './styles/styles';
 import { MOCK_SCHEMES, CATEGORIES, fetchSchemesFromBackend, fetchOccupationsFromBackend } from './constants/data';
@@ -206,6 +206,11 @@ function AppContent() {
 
   return (
     <SafeAreaView style={styles.container}>
+      <StatusBar 
+        backgroundColor={isDarkMode ? "#121212" : "#FFFFFF"}
+        barStyle={isDarkMode ? "light-content" : "dark-content"}
+        translucent={false}
+      />
       <Header />
       
       {/* Connection Status Badges */}
